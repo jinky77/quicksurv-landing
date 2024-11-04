@@ -1,28 +1,64 @@
 ---
+// @ts-ignore
+import { Icon } from "astro-icon/components";
 import Container from "@components/container.astro";
 import Link from "@components/ui/link.astro";
-import Dropdown from "./dropdown.astro";
+import { Image } from "astro:assets";
+import logo from "@assets/logo.png";
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+
+const menuItems = [
+  // {
+  //   title: "À propos",
+  //   path: "/about",
+  // },
+  // {
+  //   title: "Blog",
+  //   path: "/blog",
+  // },
+  {
+    title: "Contact",
+    path: "/contact",
+  },
+];
 ---
 
 <Container>
   <header class="flex flex-col lg:flex-row justify-between items-center my-5">
     <Astronav>
-      <div class="flex w-full lg:w-auto items-center justify-between">
-        <a href="/" class="text-lg"><span class="font-bold text-slate-800">Astro</span><span class="text-slate-500">ship</span> </a>
+      <div class="flex w-full items-center justify-between lg:w-auto">
+        <a href="/" class="text-lg flex items-center gap-3">
+          <Image src={logo} style="width: 15px" alt="Senior Protect logo." />
+          <span class="font-bold text-primary">Quicksurv</span>
+        </a>
         <div class="block lg:hidden">
           <MenuIcon class="w-4 h-4 text-gray-800" />
         </div>
       </div>
       <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
+        <ul class="flex flex-col lg:flex-row lg:gap-3">
+          {
+            menuItems.map((item) => (
+              <li>
+                <a href={item.path} class="flex lg:px-3 py-2 items-center text-gray-600 hover:text-gray-900">
+                  <span>{item.title}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
         <div class="lg:hidden flex items-center mt-3 gap-4">
-          <Link href="https://app.quicksurv.fr" style="muted" block size="md">Connexion</Link>
+          <Link href="https://app.quicksurv.fr" block size="md" class="flex justify-center items-center"
+            >Dashboard<Icon class="text-white w-4 h-4 ml-2" name="bx:bxs-chevron-right" /></Link
+          >
         </div>
       </MenuItems>
     </Astronav>
     <div>
       <div class="hidden lg:flex items-center gap-4">
-        <a href="https://app.quicksurv.fr">Connexion</a>
+        <Link href="https://app.quicksurv.fr" class="flex flrx-col justify-center items-center"
+          >Dashboard<Icon class="text-white w-4 h-4 ml-2" name="bx:bxs-chevron-right" /></Link
+        >
       </div>
     </div>
   </header>
